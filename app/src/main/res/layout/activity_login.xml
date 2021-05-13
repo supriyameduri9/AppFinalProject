@@ -32,12 +32,12 @@
         android:src="@drawable/logo" />
 
     <LinearLayout
-        android:padding="30dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="385dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="40dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="30dp">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailLogin"
@@ -79,11 +79,11 @@
             android:backgroundTint="#000000"
             android:fontFamily="sans-serif-medium"
             android:text="Login"
+            android:textAllCaps="false"
             android:textColor="#fff"
             android:textColorHint="#FAFAFA"
             android:textSize="18sp"
-            android:textStyle="normal"
-            android:textAllCaps="false"/>
+            android:textStyle="normal" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/goToSignupPage"
@@ -101,7 +101,6 @@
             android:textStyle="normal" />
 
     </LinearLayout>
-
 
 
 </LinearLayout>
