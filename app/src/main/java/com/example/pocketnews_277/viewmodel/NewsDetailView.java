@@ -6,11 +6,13 @@ import androidx.appcompat.widget.Toolbar;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -26,6 +28,8 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 public class NewsDetailView extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
 
 	private ImageView imageView;
+	private ImageButton saveButton;
+	private ImageButton shareButton;
 	private TextView date;
 	private TextView time;
 	private TextView title;
@@ -60,7 +64,8 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		title = findViewById(R.id.newsDetailTitle);
 		date = findViewById(R.id.detailViewDate);
 		minRead = findViewById(R.id.minRead);
-
+		saveButton = findViewById(R.id.saveButton);
+		shareButton  = findViewById(R.id.shareButton);
 
 		Intent intent = getIntent();
 		String apiUrl = intent.getStringExtra("url");
@@ -70,6 +75,21 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		String apiSpanTime = intent.getStringExtra("spanTime");
 		String apiAuthor = intent.getStringExtra("author");
 		String readTime = intent.getStringExtra("readTime");
+
+		saveButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.i("NEWS_DETAIL_VIEW: URL for saving ", apiUrl);
+			}
+		});
+
+		shareButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.i("NEWS_DETAIL_VIEW: URL for sharing ", apiUrl);
+			}
+		});
+
 
 		Glide.with(this)
 				.load(apiImg)

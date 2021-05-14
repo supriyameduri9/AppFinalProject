@@ -83,7 +83,6 @@
                         android:layout_height="50dp"
                         android:layout_toLeftOf="@+id/shareButton"
                         android:background="@color/white"
-                        android:onClick="showProfile"
                         app:srcCompat="@drawable/save_icon" />
 
                     <ImageButton
