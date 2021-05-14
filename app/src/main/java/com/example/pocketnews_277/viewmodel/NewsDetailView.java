@@ -74,9 +74,6 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		String apiSpanTime = intent.getStringExtra("spanTime");
 		String apiAuthor = intent.getStringExtra("author");
 		String readTime = intent.getStringExtra("readTime");
-		/*intent.setType("text/plan");
-		intent.putExtra(Intent.EXTRA_SUBJECT,content);
-*/
 
 		shareButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -161,30 +158,5 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 			isHideToolbarView = !isHideToolbarView;
 		}
 	}
-	/*@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.webView) {
-			Intent i = new Intent(Intent.ACTION_VIEW);
-			i.setData(Uri.parse(url));
-			startActivity(i);
-			return true;
-		}
-
-        if(id == R.id.share){
-            try{
-                Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("text/plan");
-                i.putExtra(Intent.EXTRA_SUBJECT,source);
-                String body = "\n" + "Share from app" + "\n";
-                i.putExtra(Intent.EXTRA_TEXT,body);
-                startActivity(Intent.createChooser(i,"Share with" ));
-            }
-            catch(Exception e) {
-                Toast.makeText(this,"Cannot share",Toast.LENGTH_SHORT).show();
-            }
-        }
-		return super.onOptionsItemSelected(item);
-	}*/
 
 }
