@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -27,9 +29,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 public class NewsDetailView extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
 
-	private ImageView imageView;
-	private ImageButton saveButton;
-	private ImageButton shareButton;
+	private ImageView imageView,saveButton,shareButton;
 	private TextView date;
 	private TextView time;
 	private TextView title;
@@ -39,7 +39,6 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 	private Toolbar toolbar;
 	private boolean isHideToolbarView = false;
 	private RelativeLayout iconsAppBar;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,15 +74,29 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		String apiSpanTime = intent.getStringExtra("spanTime");
 		String apiAuthor = intent.getStringExtra("author");
 		String readTime = intent.getStringExtra("readTime");
+		/*intent.setType("text/plan");
+		intent.putExtra(Intent.EXTRA_SUBJECT,content);
+*/
 
-		saveButton.setOnClickListener(new View.OnClickListener() {
+		shareButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.i("NEWS_DETAIL_VIEW: URL for saving ", apiUrl);
+				try{
+					Log.i("NEWS_DETAIL_VIEW: URL for sharing ", apiUrl);
+				Intent i = new Intent(Intent.ACTION_SEND);
+				i.setType("text/plan");
+				i.putExtra(Intent.EXTRA_SUBJECT,"Shared News Article from Pocket News");
+				String body = "\n" + "Share from app" + "\n";
+				i.putExtra(Intent.EXTRA_TEXT,apiUrl);
+				startActivity(Intent.createChooser(i,"Share with" ));
+			}
+			catch(Exception e) {
+				Toast.makeText(getApplicationContext(),"Cannot Share", Toast.LENGTH_SHORT).show();
+			}Log.i("NEWS_DETAIL_VIEW: URL for saving ", apiUrl);
 			}
 		});
 
-		shareButton.setOnClickListener(new View.OnClickListener() {
+		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Log.i("NEWS_DETAIL_VIEW: URL for sharing ", apiUrl);
@@ -100,6 +113,7 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		title.setText(apiTitle);
 		time.setText(apiAuthor + ". " + apiSpanTime);
 		minRead.setText(readTime);
+
 		initWebView(apiUrl);
 
 
@@ -146,7 +160,31 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 			iconsAppBar.setVisibility(View.GONE);
 			isHideToolbarView = !isHideToolbarView;
 		}
-
-
 	}
+	/*@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if (id == R.id.webView) {
+			Intent i = new Intent(Intent.ACTION_VIEW);
+			i.setData(Uri.parse(url));
+			startActivity(i);
+			return true;
+		}
+
+        if(id == R.id.share){
+            try{
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plan");
+                i.putExtra(Intent.EXTRA_SUBJECT,source);
+                String body = "\n" + "Share from app" + "\n";
+                i.putExtra(Intent.EXTRA_TEXT,body);
+                startActivity(Intent.createChooser(i,"Share with" ));
+            }
+            catch(Exception e) {
+                Toast.makeText(this,"Cannot share",Toast.LENGTH_SHORT).show();
+            }
+        }
+		return super.onOptionsItemSelected(item);
+	}*/
+
 }
