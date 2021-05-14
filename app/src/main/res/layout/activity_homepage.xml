@@ -35,7 +35,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:padding="10dp">
 
         <TextView
@@ -70,29 +70,74 @@
         </RelativeLayout>
 
     </RelativeLayout>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp">
-    <LinearLayout
+
+    <RelativeLayout
+        android:id="@+id/trendingRelativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white">
 
+        <LinearLayout
+            android:id="@+id/trending_background"
+            android:layout_width="50dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="#E0E1E1"
+            android:orientation="vertical">
 
-        <RelativeLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="208dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="17dp"
+
+                android:fontFamily="@font/bungee"
+                android:text="Trending"
+                android:textAllCaps="true"
+                android:textColor="#6C6A6A"
+                android:textSize="21dp">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/trendingNewsList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="255dp"
+            android:layout_toRightOf="@+id/trending_background">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/newsList"
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/newsList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
 
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pocketnews_277.R;
 import com.example.pocketnews_277.adapter.NewsListAdapter;
+import com.example.pocketnews_277.adapter.TrendingListAdapter;
 import com.example.pocketnews_277.model.NewsDataModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,8 +37,11 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private NewsDataModel newsDataModel;
+    private NewsDataModel trendingDataModel;
     private NewsListAdapter adapter;
+    private TrendingListAdapter trendingListAdapter;
     private NewsDataViewModel viewModel;
+    private RelativeLayout trendingRelativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,8 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_homepage);
+
+        trendingRelativeLayout = (RelativeLayout) findViewById(R.id.trendingRelativeLayout);
 
         RecyclerView recyclerView = findViewById(R.id.newsList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -56,7 +63,7 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
             @Override
             public void onChanged(NewsDataModel newsDataModel) {
                 if(newsDataModel != null){
-                    HomepageActivity.this.newsDataModel = HomepageActivity.this.newsDataModel;
+                    HomepageActivity.this.newsDataModel = newsDataModel;
                     adapter.setNewsList(newsDataModel.getArticles());
                 } else{
                     Toast.makeText(HomepageActivity.this, "Could not retrieve data!", Toast.LENGTH_SHORT).show();
@@ -66,12 +73,35 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
 
         viewModel.makeApiCall();
 
+
+        RecyclerView trendingRecyclerView = findViewById(R.id.trendingNewsList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
+        trendingRecyclerView.setLayoutManager(linearLayoutManager);
+        trendingDataModel = new NewsDataModel();
+        trendingListAdapter = new TrendingListAdapter(this, trendingDataModel.getArticles());
+        trendingRecyclerView.setAdapter(trendingListAdapter);
+        viewModel.getTrendingNewsDataObserver().observe(this, new Observer<NewsDataModel>() {
+            @Override
+            public void onChanged(NewsDataModel trendingDataModel) {
+                if(trendingDataModel != null){
+                    HomepageActivity.this.trendingDataModel = trendingDataModel;
+                    trendingListAdapter.setTrendingNewsList(trendingDataModel.getArticles());
+                } else{
+                    Toast.makeText(HomepageActivity.this, "Could not retrieve trending news!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        viewModel.makeTrendingApiCall("general");
+
+
         simpleSearchView = (SearchView) findViewById(R.id.searchInput);
         simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.i(TAG, "Search input: " + query);
                 viewModel.makeApiCall(query);
+                trendingRelativeLayout.setVisibility(View.GONE);
                 return false;
             }
 
@@ -80,6 +110,7 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
                 if (simpleSearchView.getQuery().length() == 0) {
                     Log.i(TAG, "Search got cleared");
                     viewModel.makeApiCall();
+                    trendingRelativeLayout.setVisibility(View.VISIBLE);
                 }
                 return false;
             }
