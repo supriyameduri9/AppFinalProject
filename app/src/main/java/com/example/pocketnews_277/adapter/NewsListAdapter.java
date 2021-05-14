@@ -45,11 +45,12 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
 
     @Override
     public void onBindViewHolder(@NonNull NewsListAdapter.NewsViewHolder holder, int position) {
-        holder.title.setText(this.newsList.get(position).getTitle());
-        holder.author.setText(this.newsList.get(position).getAuthor());
-        holder.publishedAt.setText(this.newsList.get(position).getPrettyPublishedAt());
+		ArticleModel newsItem = newsList.get(position);
+		holder.title.setText(newsItem.getTitle());
+        holder.author.setText(newsItem.getAuthor());
+        holder.publishedAt.setText(newsItem.getPrettyPublishedAt() + ". " + newsItem.getAvgReadingTime());
         Glide.with(context)
-                .load(this.newsList.get(position).getUrlToImage())
+                .load(newsItem.getUrlToImage())
                 .apply(RequestOptions.centerCropTransform())
                 .into(holder.newsImage);
 
@@ -57,7 +58,6 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-				ArticleModel newsItem = newsList.get(position);
 				Intent detailViewIntent = new Intent(context, NewsDetailView.class);
 				detailViewIntent.putExtra("url", newsItem.getUrl());
 				detailViewIntent.putExtra("title", newsItem.getTitle());
@@ -65,6 +65,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
 				detailViewIntent.putExtra("date", newsItem.getPublishedDate());
 				detailViewIntent.putExtra("spanTime", newsItem.getPrettyPublishedAt());
 				detailViewIntent.putExtra("author", newsItem.getAuthor());
+				detailViewIntent.putExtra("readTime", newsItem.getAvgReadingTime());
 
 				context.startActivity(detailViewIntent);
 

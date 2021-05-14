@@ -138,18 +138,38 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
-
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@id/newsDetailTitle"
+                        >
                     <TextView
                         android:id="@+id/spanTime"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
-                        android:layout_below="@id/newsDetailTitle"
-                        android:layout_marginTop="10dp"
                         android:maxLines="1"
                         android:drawablePadding="10dp"
                         android:singleLine="true"
                         android:ellipsize="end"
                         android:text="a time ago" />
+
+
+                    <ImageView
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:id="@+id/timerIcon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/read_icon" />
+
+                    <TextView
+                        android:id="@+id/minRead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:text="a min read" />
+                    </LinearLayout>
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

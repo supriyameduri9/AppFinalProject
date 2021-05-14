@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ArticleModel {
 
@@ -59,6 +61,17 @@ public class ArticleModel {
         this.description = description;
     }
 
+    public String getAvgReadingTime(){
+    	float totalChars = 200;
+		Pattern pattern = Pattern.compile("\\[\\+([0-9]+) chars\\]");
+		Matcher matcher = pattern.matcher(content);
+		if (matcher.find())
+		{
+			totalChars += Integer.valueOf(matcher.group(1));
+		}
+		return (int) Math.ceil(totalChars/863) + " min read" ; // Average read is ~863 characters per minute
+	}
+
     public String getPublishedAt() {
         return formatDate(returnEmptyIfNull(publishedAt));
     }
@@ -79,7 +92,7 @@ public class ArticleModel {
 		try {
 			Date date = inputFormat.parse(publishedAt);
 			return (DateUtils.getRelativeTimeSpanString(date.getTime(), Calendar.getInstance().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS).toString())
-					.replace("In ", "") + " ago";
+					.replace("In ", "").replace(" ago", "") + " ago";
 		}
 		catch (Exception e){
 			return "";

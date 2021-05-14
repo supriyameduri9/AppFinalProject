@@ -61,6 +61,7 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
 				detailViewIntent.putExtra("date", newsItem.getPublishedDate());
 				detailViewIntent.putExtra("spanTime", newsItem.getPrettyPublishedAt());
 				detailViewIntent.putExtra("author", newsItem.getAuthor());
+				detailViewIntent.putExtra("readTime", newsItem.getAvgReadingTime());
 
 				context.startActivity(detailViewIntent);
 

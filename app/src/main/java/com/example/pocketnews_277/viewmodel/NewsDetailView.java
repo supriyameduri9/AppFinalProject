@@ -29,6 +29,7 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 	private TextView date;
 	private TextView time;
 	private TextView title;
+	private TextView minRead;
 	private AppBarLayout appBarLayout;
 	private FrameLayout date_behavior;
 	private Toolbar toolbar;
@@ -58,6 +59,7 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		time = findViewById(R.id.spanTime);
 		title = findViewById(R.id.newsDetailTitle);
 		date = findViewById(R.id.detailViewDate);
+		minRead = findViewById(R.id.minRead);
 
 
 		Intent intent = getIntent();
@@ -67,6 +69,7 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		String apiDate = intent.getStringExtra("date");
 		String apiSpanTime = intent.getStringExtra("spanTime");
 		String apiAuthor = intent.getStringExtra("author");
+		String readTime = intent.getStringExtra("readTime");
 
 		Glide.with(this)
 				.load(apiImg)
@@ -75,7 +78,8 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 				.into(imageView);
 		date.setText(apiDate);
 		title.setText(apiTitle);
-		time.setText(apiAuthor + ". " + apiSpanTime + ". ");
+		time.setText(apiAuthor + ". " + apiSpanTime);
+		minRead.setText(readTime);
 		initWebView(apiUrl);
 
 
