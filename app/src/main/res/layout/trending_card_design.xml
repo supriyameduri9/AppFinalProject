@@ -39,7 +39,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/baloo"
             android:text="Author"
-            android:textSize="12sp">
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:freezesText="false">
 
         </TextView>
 

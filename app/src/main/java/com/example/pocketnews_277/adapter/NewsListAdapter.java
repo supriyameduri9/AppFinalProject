@@ -1,7 +1,7 @@
 package com.example.pocketnews_277.adapter;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.pocketnews_277.R;
 import com.example.pocketnews_277.model.ArticleModel;
+import com.example.pocketnews_277.viewmodel.NewsDetailView;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
     public void onBindViewHolder(@NonNull NewsListAdapter.NewsViewHolder holder, int position) {
         holder.title.setText(this.newsList.get(position).getTitle());
         holder.author.setText(this.newsList.get(position).getAuthor());
-        holder.publishedAt.setText(this.newsList.get(position).getPublishedAt());
+        holder.publishedAt.setText(this.newsList.get(position).getPrettyPublishedAt());
         Glide.with(context)
                 .load(this.newsList.get(position).getUrlToImage())
                 .apply(RequestOptions.centerCropTransform())
@@ -57,9 +57,17 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                CustomTabsIntent customTabsIntent = builder.build();
-                customTabsIntent.launchUrl(context, Uri.parse(newsList.get(position).getUrl()));
+				ArticleModel newsItem = newsList.get(position);
+				Intent detailViewIntent = new Intent(context, NewsDetailView.class);
+				detailViewIntent.putExtra("url", newsItem.getUrl());
+				detailViewIntent.putExtra("title", newsItem.getTitle());
+				detailViewIntent.putExtra("img", newsItem.getUrlToImage());
+				detailViewIntent.putExtra("date", newsItem.getPublishedDate());
+				detailViewIntent.putExtra("spanTime", newsItem.getPrettyPublishedAt());
+				detailViewIntent.putExtra("author", newsItem.getAuthor());
+
+				context.startActivity(detailViewIntent);
+
             }
         });
     }
@@ -85,7 +93,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
             newsImage = (ImageView) newsItem.findViewById(R.id.newsImg);
             title = (TextView) newsItem.findViewById(R.id.newsTitle);
             author = (TextView) newsItem.findViewById(R.id.author);
-            publishedAt = (TextView) newsItem.findViewById(R.id.date);
+            publishedAt = (TextView) newsItem.findViewById(R.id.detailViewDate);
 
         }
 

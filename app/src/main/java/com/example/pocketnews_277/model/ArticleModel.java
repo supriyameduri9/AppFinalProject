@@ -1,5 +1,13 @@
 package com.example.pocketnews_277.model;
 
+import android.text.format.DateUtils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+
 public class ArticleModel {
 
     private String title;
@@ -54,6 +62,29 @@ public class ArticleModel {
     public String getPublishedAt() {
         return formatDate(returnEmptyIfNull(publishedAt));
     }
+
+	public String getPublishedDate() {
+		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd, yyyy");
+		try {
+			return outputFormat.format(inputFormat.parse(publishedAt));
+		} catch (Exception e){
+			return "";
+		}
+	}
+
+    public String getPrettyPublishedAt(){
+    	if (publishedAt == null || publishedAt.isEmpty()) return "";
+		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		try {
+			Date date = inputFormat.parse(publishedAt);
+			return (DateUtils.getRelativeTimeSpanString(date.getTime(), Calendar.getInstance().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS).toString())
+					.replace("In ", "") + " ago";
+		}
+		catch (Exception e){
+			return "";
+		}
+	}
 
     public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;

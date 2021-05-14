@@ -1,6 +1,7 @@
 package com.example.pocketnews_277.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.pocketnews_277.R;
 import com.example.pocketnews_277.model.ArticleModel;
+import com.example.pocketnews_277.viewmodel.NewsDetailView;
 
 import java.util.List;
 
@@ -47,6 +49,23 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
                 .load(this.trendingNewsList.get(position).getUrlToImage())
                 .apply(RequestOptions.centerCropTransform())
                 .into(holder.trendingImage);
+
+		holder.itemView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ArticleModel newsItem = trendingNewsList.get(position);
+				Intent detailViewIntent = new Intent(context, NewsDetailView.class);
+				detailViewIntent.putExtra("url", newsItem.getUrl());
+				detailViewIntent.putExtra("title", newsItem.getTitle());
+				detailViewIntent.putExtra("img", newsItem.getUrlToImage());
+				detailViewIntent.putExtra("date", newsItem.getPublishedDate());
+				detailViewIntent.putExtra("spanTime", newsItem.getPrettyPublishedAt());
+				detailViewIntent.putExtra("author", newsItem.getAuthor());
+
+				context.startActivity(detailViewIntent);
+
+			}
+		});
     }
 
     @Override

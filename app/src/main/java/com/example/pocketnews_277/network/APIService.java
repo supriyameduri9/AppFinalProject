@@ -8,10 +8,10 @@ import retrofit2.http.Query;
 
 public interface APIService {
 
-    @GET(value = "v2/everything?language=en&sources=fox-news")
+    @GET(value = "v2/everything?language=en&sources=fox-news&sortBy=popularity")
     Call<NewsDataModel> newsList(@Query("apiKey") String api_key, @Query("from") String today_date);
 
-    @GET(value = "v2/everything?language=en&sources=fox-news")
+    @GET(value = "v2/everything?language=en&sources=fox-news&sortBy=popularity")
     Call<NewsDataModel> searchNewsList(@Query("apiKey") String api_key, @Query("from") String today_date, @Query("q") String search_key);
 
     @GET(value = "v2/top-headlines?language=en")
