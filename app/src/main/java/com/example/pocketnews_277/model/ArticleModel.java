@@ -3,6 +3,11 @@ package com.example.pocketnews_277.model;
 import android.text.format.DateUtils;
 
 import java.io.Serializable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import com.google.firebase.database.annotations.NotNull;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -10,16 +15,41 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
+
+
+@Entity(tableName = "articles")
 
 public class ArticleModel implements Serializable {
 
+    @PrimaryKey(autoGenerate = true)
+    @Nullable
+    private Integer id;
+
+    @Nullable
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(@Nullable Integer id) {
+        this.id = id;
+    }
+
+    @NotNull
     private String title;
+    @NotNull
     private String author;
+    @NotNull
     private String description;
+    @NotNull
     private String publishedAt;
+    @NotNull
     private String urlToImage;
+    @NotNull
     private String url;
+    @NotNull
     private String content;
+    @NotNull
     private String category;
 
     private String returnEmptyIfNull(String value){

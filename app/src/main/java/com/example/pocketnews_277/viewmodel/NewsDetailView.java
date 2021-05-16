@@ -3,9 +3,7 @@ package com.example.pocketnews_277.viewmodel;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,9 +11,7 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +23,9 @@ import com.example.pocketnews_277.R;
 import com.example.pocketnews_277.model.ArticleModel;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class NewsDetailView extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
 
@@ -40,6 +39,14 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 	private Toolbar toolbar;
 	private boolean isHideToolbarView = false;
 	private RelativeLayout iconsAppBar;
+	private FirebaseFirestore firestore;
+	private FirebaseAuth auth;
+	private String currentUserId;
+	private final NewsDataViewModel viewModel;
+
+	public NewsDetailView(NewsDataViewModel viewModel) {
+		this.viewModel = viewModel;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +73,10 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		minRead = findViewById(R.id.minRead);
 		saveButton = findViewById(R.id.saveButton);
 		shareButton  = findViewById(R.id.shareButton);
+
+		firestore = FirebaseFirestore.getInstance();
+		auth = FirebaseAuth.getInstance();
+		currentUserId = auth.getCurrentUser().getUid();
 
 		Intent intent = getIntent();
 		ArticleModel newsItem = (ArticleModel) intent.getSerializableExtra("item");
@@ -98,11 +109,12 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.i("NEWS_DETAIL_VIEW", "Entered save function");
-				// Save newsItem object
+
+				Log.i("NEWS_DETAIL_VIEW: URL for sharing ", apiUrl);
+				viewModel.saveArticle(newsItem);
+				Toast.makeText(getApplicationContext(),"Article saved successfully!",Toast.LENGTH_SHORT).show();
 			}
 		});
-
 
 		Glide.with(this)
 				.load(apiImg)
@@ -113,9 +125,7 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		title.setText(apiTitle);
 		time.setText(apiAuthor + ". " + apiSpanTime);
 		minRead.setText(readTime);
-
 		initWebView(apiUrl);
-
 
 	}
 
