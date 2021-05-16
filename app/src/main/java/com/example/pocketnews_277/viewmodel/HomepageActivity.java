@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,6 +29,8 @@ import com.example.pocketnews_277.adapter.TrendingListAdapter;
 import com.example.pocketnews_277.model.NewsDataModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -41,16 +44,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
     final String TAG = "HomepageActivity";
-    private SearchView simpleSearchView;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private NewsDataModel newsDataModel;
-    private NewsDataModel trendingDataModel;
-    private NewsListAdapter adapter;
-    private TrendingListAdapter trendingListAdapter;
-    private NewsDataViewModel viewModel;
-    private RelativeLayout trendingRelativeLayout;
-	private RelativeLayout searchRelativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,72 +54,32 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_homepage);
 
-        searchRelativeLayout = (RelativeLayout) findViewById(R.id.searchBar);
-        trendingRelativeLayout = (RelativeLayout) findViewById(R.id.trendingRelativeLayout);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,new HomeFragment()).commit();
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+			@Override
+			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+				Fragment selectedFragment = null;
+				switch(item.getItemId()){
+					case R.id.feedPage:
+						selectedFragment = new HomeFragment();
+						break;
+					case R.id.allStories:
+						selectedFragment = new StoriesFragment();
+						break;
+					case R.id.myStories:
+						selectedFragment = new MyStoriesFragment();
+						break;
+					case R.id.savedList:
+						selectedFragment = new SavedFragment();
+						break;
 
-        RecyclerView recyclerView = findViewById(R.id.newsList);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        newsDataModel = new NewsDataModel();
-        adapter = new NewsListAdapter(this, newsDataModel.getArticles());
-        recyclerView.setAdapter(adapter);
-        viewModel = ViewModelProviders.of(this).get(NewsDataViewModel.class);
-        viewModel.getNewsDataObserver().observe(this, new Observer<NewsDataModel>() {
-            @Override
-            public void onChanged(NewsDataModel newsDataModel) {
-                if(newsDataModel != null){
-                    HomepageActivity.this.newsDataModel = newsDataModel;
-                    adapter.setNewsList(newsDataModel.getArticles());
-                } else{
-                    Toast.makeText(HomepageActivity.this, "Could not retrieve data!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+				}
 
-        viewModel.makeApiCall();
-
-
-        RecyclerView trendingRecyclerView = findViewById(R.id.trendingNewsList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        trendingRecyclerView.setLayoutManager(linearLayoutManager);
-        trendingDataModel = new NewsDataModel();
-        trendingListAdapter = new TrendingListAdapter(this, trendingDataModel.getArticles());
-        trendingRecyclerView.setAdapter(trendingListAdapter);
-        viewModel.getTrendingNewsDataObserver().observe(this, new Observer<NewsDataModel>() {
-            @Override
-            public void onChanged(NewsDataModel trendingDataModel) {
-                if(trendingDataModel != null){
-                    HomepageActivity.this.trendingDataModel = trendingDataModel;
-                    trendingListAdapter.setTrendingNewsList(trendingDataModel.getArticles());
-                } else{
-                    Toast.makeText(HomepageActivity.this, "Could not retrieve trending news!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        viewModel.makeTrendingApiCall("general");
-
-
-        simpleSearchView = (SearchView) findViewById(R.id.searchInput);
-        simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Log.i(TAG, "Search input: " + query);
-                viewModel.makeApiCall(query);
-                trendingRelativeLayout.setVisibility(View.GONE);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (simpleSearchView.getQuery().length() == 0) {
-                    Log.i(TAG, "Search got cleared");
-                    viewModel.makeApiCall();
-                    trendingRelativeLayout.setVisibility(View.VISIBLE);
-                }
-                return false;
-            }
-        });
+				getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,selectedFragment).commit();
+				return true;
+			}
+		});
 
         mAuth = FirebaseAuth.getInstance();
 		db = FirebaseFirestore.getInstance();
@@ -132,11 +87,6 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
         loadHomePage();
     }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		searchRelativeLayout.requestFocus();
-	}
 
 	public void showProfile(View v) {
         PopupMenu profileMenu = new PopupMenu(this,v);
@@ -158,15 +108,6 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
             default: return false;
         }
     }
-
-	@Override
-	public boolean dispatchTouchEvent(MotionEvent ev) {
-		if (getCurrentFocus() != null) {
-			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-		}
-		return super.dispatchTouchEvent(ev);
-	}
 
     private void loadHomePage(){
 
@@ -192,4 +133,15 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
 				});
 
     }
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		if (getCurrentFocus() != null) {
+			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+		}
+		return super.dispatchTouchEvent(ev);
+
+
+	}
 }
