@@ -58,7 +58,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="40dp"
             android:background="#F8F7F7"
-            android:elevation="8dp">
+            android:elevation="8dp"
+            android:focusableInTouchMode="true">
 
             <SearchView
                 android:id="@+id/searchInput"

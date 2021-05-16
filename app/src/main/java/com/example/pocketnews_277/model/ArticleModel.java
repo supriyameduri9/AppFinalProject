@@ -64,7 +64,7 @@ public class ArticleModel {
     public String getAvgReadingTime(){
     	float totalChars = 200;
 		Pattern pattern = Pattern.compile("\\[\\+([0-9]+) chars\\]");
-		Matcher matcher = pattern.matcher(content);
+		Matcher matcher = pattern.matcher(getContent());
 		if (matcher.find())
 		{
 			totalChars += Integer.valueOf(matcher.group(1));

@@ -1,11 +1,14 @@
 package com.example.pocketnews_277.viewmodel;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -47,6 +50,7 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
     private TrendingListAdapter trendingListAdapter;
     private NewsDataViewModel viewModel;
     private RelativeLayout trendingRelativeLayout;
+	private RelativeLayout searchRelativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_homepage);
 
+        searchRelativeLayout = (RelativeLayout) findViewById(R.id.searchBar);
         trendingRelativeLayout = (RelativeLayout) findViewById(R.id.trendingRelativeLayout);
 
         RecyclerView recyclerView = findViewById(R.id.newsList);
@@ -127,7 +132,13 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
         loadHomePage();
     }
 
-    public void showProfile(View v) {
+	@Override
+	protected void onResume() {
+		super.onResume();
+		searchRelativeLayout.requestFocus();
+	}
+
+	public void showProfile(View v) {
         PopupMenu profileMenu = new PopupMenu(this,v);
         profileMenu.setOnMenuItemClickListener(this);
         profileMenu.inflate(R.menu.profile_menu);
@@ -147,6 +158,15 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
             default: return false;
         }
     }
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		if (getCurrentFocus() != null) {
+			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+		}
+		return super.dispatchTouchEvent(ev);
+	}
 
     private void loadHomePage(){
 
