@@ -2,6 +2,7 @@ package com.example.pocketnews_277.model;
 
 import android.text.format.DateUtils;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ArticleModel {
+public class ArticleModel implements Serializable {
 
     private String title;
     private String author;

@@ -55,14 +55,7 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
 			public void onClick(View v) {
 				ArticleModel newsItem = trendingNewsList.get(position);
 				Intent detailViewIntent = new Intent(context, NewsDetailView.class);
-				detailViewIntent.putExtra("url", newsItem.getUrl());
-				detailViewIntent.putExtra("title", newsItem.getTitle());
-				detailViewIntent.putExtra("img", newsItem.getUrlToImage());
-				detailViewIntent.putExtra("date", newsItem.getPublishedDate());
-				detailViewIntent.putExtra("spanTime", newsItem.getPrettyPublishedAt());
-				detailViewIntent.putExtra("author", newsItem.getAuthor());
-				detailViewIntent.putExtra("readTime", newsItem.getAvgReadingTime());
-
+				detailViewIntent.putExtra("item", newsItem);
 				context.startActivity(detailViewIntent);
 
 			}

@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.pocketnews_277.R;
+import com.example.pocketnews_277.model.ArticleModel;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
@@ -67,13 +68,14 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		shareButton  = findViewById(R.id.shareButton);
 
 		Intent intent = getIntent();
-		String apiUrl = intent.getStringExtra("url");
-		String apiTitle = intent.getStringExtra("title");
-		String apiImg = intent.getStringExtra("img");
-		String apiDate = intent.getStringExtra("date");
-		String apiSpanTime = intent.getStringExtra("spanTime");
-		String apiAuthor = intent.getStringExtra("author");
-		String readTime = intent.getStringExtra("readTime");
+		ArticleModel newsItem = (ArticleModel) intent.getSerializableExtra("item");
+		String apiUrl = newsItem.getUrl();
+		String apiTitle = newsItem.getTitle();
+		String apiImg = newsItem.getUrlToImage();
+		String apiDate = newsItem.getPublishedDate();
+		String apiSpanTime = newsItem.getPrettyPublishedAt();
+		String apiAuthor = newsItem.getAuthor();
+		String readTime = newsItem.getAvgReadingTime();
 
 		shareButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -96,7 +98,8 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.i("NEWS_DETAIL_VIEW: URL for sharing ", apiUrl);
+				Log.i("NEWS_DETAIL_VIEW", "Entered save function");
+				// Save newsItem object
 			}
 		});
 
