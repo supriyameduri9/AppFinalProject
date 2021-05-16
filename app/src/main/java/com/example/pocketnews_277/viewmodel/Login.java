@@ -53,8 +53,23 @@ public class Login extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+				String email = emailLoginInput.getEditText().getText().toString();
+				String password = passwordLoginInput.getEditText().getText().toString();
 
-                login(emailLoginInput.getEditText().getText().toString(),passwordLoginInput.getEditText().getText().toString());
+				emailLoginInput.setError(null);
+				passwordLoginInput.setError(null);
+
+				if(email.isEmpty()){
+					emailLoginInput.setError("Please enter email");
+					emailLoginInput.requestFocus();
+					return;
+				} else if(password.isEmpty()){
+					passwordLoginInput.setError("Please enter password");
+					passwordLoginInput.requestFocus();
+					return;
+				}
+
+				login(email, password);
 
             }
         });

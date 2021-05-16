@@ -87,19 +87,25 @@ public class SignUp extends AppCompatActivity {
         String email = emailInput.getEditText().getText().toString();
         String password = passwordInput.getEditText().getText().toString();
 
-        if(userName.isEmpty()){
-            userNameInput.setError("Please enter User name");
-            return;
+		userNameInput.setError(null);
+		emailInput.setError(null);
+		passwordInput.setError(null);
 
+		if(userName.isEmpty()){
+            userNameInput.setError("Please enter User name");
+            userNameInput.requestFocus();
+            return;
         } else if(email.isEmpty()){
             emailInput.setError("Please enter Email");
+			emailInput.requestFocus();
             return;
 
         } else if(password.isEmpty()){
             passwordInput.setError("Please enter password");
+			passwordInput.requestFocus();
             return;
-
         }
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
