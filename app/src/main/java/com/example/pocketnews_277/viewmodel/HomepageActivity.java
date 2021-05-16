@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -46,6 +47,7 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
     final String TAG = "HomepageActivity";
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private String username = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,14 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_homepage);
+
+		ImageButton postStory = (ImageButton) findViewById(R.id.postStory);
+		postStory.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showPostStoryPage();
+			}
+		});
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,new HomeFragment()).commit();
@@ -86,6 +96,12 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
 
         loadHomePage();
     }
+
+    public void showPostStoryPage(){
+		Intent postStoryViewIntent = new Intent(this, AddStory.class);
+		postStoryViewIntent.putExtra("username", username);
+		startActivity(postStoryViewIntent);
+	}
 
 
 	public void showProfile(View v) {
@@ -121,9 +137,10 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
 							for (QueryDocumentSnapshot document : task.getResult()) {
 								if (document.getId().equals("users")) {
 									Log.i(TAG, document.getId() + " => " + document.getData());
-									String username = "Hey " + document.getData().get("user_name") + "!";
+									username = document.getData().get("user_name").toString();
+									String userGreeting = "Hey " + username + "!";
 									TextView greeting = findViewById(R.id.userGreeting);
-									greeting.setText(username);
+									greeting.setText(userGreeting);
 								}
 							}
 						} else {

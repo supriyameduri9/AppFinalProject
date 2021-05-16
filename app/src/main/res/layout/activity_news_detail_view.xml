@@ -161,7 +161,7 @@
                         android:id="@+id/timerIcon"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/read_icon" />
+                        android:src="@drawable/add_image_icon" />
 
                     <TextView
                         android:id="@+id/minRead"

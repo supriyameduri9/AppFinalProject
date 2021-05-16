@@ -30,6 +30,7 @@
                 app:srcCompat="@drawable/ic_action_name" />
 
             <ImageButton
+                android:id="@+id/postStory"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"

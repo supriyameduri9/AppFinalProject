@@ -122,6 +122,8 @@ public class SignUp extends AppCompatActivity {
 									new OnSuccessListener<Void>() {
 										@Override
 										public void onSuccess(Void aVoid) {
+											// create an empty document, so that user can add stories to it.
+											db.collection(user.getUid()).document("stories").set(new HashMap<String, Object>());
 											Toast.makeText(SignUp.this, "Registration is successful.",
 													Toast.LENGTH_SHORT).show();
 										}

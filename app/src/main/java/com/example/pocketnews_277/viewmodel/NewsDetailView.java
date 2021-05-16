@@ -103,7 +103,6 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 			}
 		});
 
-
 		Glide.with(this)
 				.load(apiImg)
 				.apply(RequestOptions.centerCropTransform())
@@ -115,8 +114,6 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		minRead.setText(readTime);
 
 		initWebView(apiUrl);
-
-
 	}
 
 	private void initWebView(String url){

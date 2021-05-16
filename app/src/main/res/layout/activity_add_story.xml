@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F5F5"
+    tools:context=".viewmodel.AddStory">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:paddingTop="30px"
+                android:paddingBottom="30px"
+                android:text="Tell us your story!"
+                android:textAlignment="center"
+                android:textColor="#040303"
+                android:textSize="36sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Title"
+                android:textColorHint="#716F6F">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/inputCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:entries="@array/Category"
+                android:spinnerMode="dropdown" />
+
+            <ImageView
+                android:id="@+id/inputImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="15dp"
+                android:visibility="visible"
+                android:src="@drawable/add_image_icon" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Content"
+                android:textColorHint="#716F6F">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:gravity="top"
+                    android:inputType="textMultiLine|text|textCapSentences" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/cancelButton"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#000"
+                    android:backgroundTint="#000000"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="Cancel"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textColorHint="#FAFAFA"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/submitButton"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#000"
+                    android:backgroundTint="#000000"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="Save"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textColorHint="#FAFAFA"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

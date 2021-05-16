@@ -2,6 +2,8 @@ package com.example.pocketnews_277.model;
 
 import android.text.format.DateUtils;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,6 +64,7 @@ public class ArticleModel implements Serializable {
         this.description = description;
     }
 
+	@Exclude
     public String getAvgReadingTime(){
     	float totalChars = 200;
 		Pattern pattern = Pattern.compile("\\[\\+([0-9]+) chars\\]");
@@ -74,9 +77,10 @@ public class ArticleModel implements Serializable {
 	}
 
     public String getPublishedAt() {
-        return formatDate(returnEmptyIfNull(publishedAt));
+        return returnEmptyIfNull(publishedAt);
     }
 
+	@Exclude
 	public String getPublishedDate() {
 		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -87,6 +91,7 @@ public class ArticleModel implements Serializable {
 		}
 	}
 
+	@Exclude
     public String getPrettyPublishedAt(){
     	if (publishedAt == null || publishedAt.isEmpty()) return "";
 		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
@@ -135,6 +140,29 @@ public class ArticleModel implements Serializable {
         this.urlToImage = urlToImage;
         this.url = url;
         this.content = content;
-        this.publishedAt =  formatDate(publishedAt);
+		this.publishedAt =  publishedAt;
     }
+
+	public ArticleModel(String author, String title, String publishedAt, String urlToImage, String content, String category) {
+		this.author = author;
+		this.title = title;
+		this.publishedAt =  publishedAt;
+		this.urlToImage = urlToImage;
+		this.content = content;
+		this.category = category;
+	}
+
+	@Override
+	public String toString() {
+		return "ArticleModel{" +
+				"title='" + title + '\'' +
+				", author='" + author + '\'' +
+				", description='" + description + '\'' +
+				", publishedAt='" + publishedAt + '\'' +
+				", urlToImage='" + urlToImage + '\'' +
+				", url='" + url + '\'' +
+				", content='" + content + '\'' +
+				", category='" + category + '\'' +
+				'}';
+	}
 }

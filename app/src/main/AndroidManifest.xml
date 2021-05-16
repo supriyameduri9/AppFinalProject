@@ -11,8 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PocketNews277">
-        <activity android:name=".viewmodel.NewsDetailView"
-            android:theme="@style/DetailPageTheme"></activity>
+        <activity android:name=".viewmodel.AddStory" android:theme="@style/FullPageTheme"></activity>
+        <activity
+            android:name=".viewmodel.NewsDetailView"
+            android:theme="@style/DetailPageTheme" />
         <activity
             android:name=".viewmodel.HomepageActivity"
             android:theme="@style/FullPageTheme" />
