@@ -31,7 +31,7 @@
         android:layout_marginBottom="252dp"
         app:lottie_autoPlay="true"
         app:lottie_fileName="news.json"
-        app:lottie_loop="true" />
+        app:lottie_loop="false" />
 
     <TextView
         android:layout_width="match_parent"

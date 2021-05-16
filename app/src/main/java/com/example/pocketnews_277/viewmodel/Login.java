@@ -57,7 +57,20 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private void login(String email,String password){
+	@Override
+	protected void onStart() {
+		super.onStart();
+		if (mAuth.getCurrentUser() != null) {
+			sendToHomePage();
+		}
+	}
+
+	private void sendToHomePage(){
+		Intent goToHomepage = new Intent(Login.this,HomepageActivity.class);
+		startActivity(goToHomepage);
+	}
+
+	private void login(String email, String password){
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -68,8 +81,7 @@ public class Login extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             // send user to the homepage, once login is successful
-                            Intent goToHomepage = new Intent(Login.this,HomepageActivity.class);
-                            startActivity(goToHomepage);
+							sendToHomePage();
 
                             // updateUI(user);
                         } else {
