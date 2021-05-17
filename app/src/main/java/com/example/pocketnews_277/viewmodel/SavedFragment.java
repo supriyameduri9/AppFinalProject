@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,10 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.pocketnews_277.R;
 import com.example.pocketnews_277.adapter.NewsListAdapter;
+import com.example.pocketnews_277.model.ArticleModel;
 import com.example.pocketnews_277.model.NewsDataModel;
+
+import java.util.List;
 
 public class SavedFragment extends Fragment {
 
@@ -31,9 +36,17 @@ public class SavedFragment extends Fragment {
 		viewModel = ViewModelProviders.of(this, new NewsDataViewModelProviderFactory(getActivity())).get(NewsDataViewModel.class);
 
 		saverecyclerView = (RecyclerView) view.findViewById(R.id.rvSavedNews);
+		viewModel.getSavedNews().observe(getActivity(), new Observer<List<ArticleModel>>() {
+			@Override
+			public void onChanged(List<ArticleModel> articles) {
+				if(articles != null){
+					newsListAdapter.setNewsList(articles);
+				} else{
+					Toast.makeText(getActivity(), "Could not retrieve data!", Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
 		setupRecyclerView();
-
-
 	}
 
 	private void setupRecyclerView(){

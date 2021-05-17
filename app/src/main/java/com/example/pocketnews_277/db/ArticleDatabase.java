@@ -17,7 +17,7 @@ public abstract class ArticleDatabase extends RoomDatabase {
 
         public static synchronized ArticleDatabase getInstance(Context context){
             if(instance == null) {
-                instance = Room.databaseBuilder(context.getApplicationContext(),ArticleDatabase.class,"article_db.db").
+                instance = Room.databaseBuilder(context.getApplicationContext(),ArticleDatabase.class,"article_db.db").allowMainThreadQueries().
                         fallbackToDestructiveMigration().build();
             }
             return instance;
