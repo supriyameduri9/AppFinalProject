@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="Notifications"
-        android:textSize="25dp" />
+        android:textSize="36dp" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/allowNotifySwitch"
@@ -31,11 +31,15 @@
         app:track="@drawable/track"
         tools:ignore="HardcodedText" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <RadioGroup
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
         <RadioButton
             android:id="@+id/allNewsButton"
             android:layout_width="wrap_content"
@@ -55,21 +59,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Positive News"
+            android:text="Uplifting News"
             android:button="@android:color/transparent"
             android:elevation="4dp"
             android:textSize="25sp"
             android:padding="16dp"
             android:textColor="@drawable/text_color"
             android:background="@drawable/radio_selector"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"/>
+
 </RadioGroup>
+
+    </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/saveNotifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="15dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:background="#000"
