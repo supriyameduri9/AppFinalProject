@@ -114,6 +114,11 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch(item.getItemId()){
+			case R.id.pushNotification:
+				// redirect user to login activity
+				Intent goToLoginIntent = new Intent(HomepageActivity.this, Login.class);
+				startActivity(goToLoginIntent);
+				Toast.makeText(this, "Signed out successfully!", Toast.LENGTH_SHORT).show();
             case R.id.signOutOption:
                 mAuth.signOut();
                 // redirect user to login activity

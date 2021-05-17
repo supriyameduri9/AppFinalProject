@@ -122,7 +122,7 @@ public class AddStory extends AppCompatActivity {
 		FirebaseUser user = mAuth.getCurrentUser();
 
 		db = FirebaseFirestore.getInstance();
-		DocumentReference storiesRef = db.collection(user.getUid()).document("stories");
+		DocumentReference storiesRef = db.collection("stories").document(user.getUid());
 		storiesRef.update("articles", FieldValue.arrayUnion(articleModel)).addOnSuccessListener(
 				new OnSuccessListener<Void>() {
 					@Override

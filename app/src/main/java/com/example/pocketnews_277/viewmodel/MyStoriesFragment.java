@@ -51,7 +51,7 @@ public class MyStoriesFragment extends Fragment {
 
 	private void loadMyStoriesFromFirestore(){
 		FirebaseUser user = mAuth.getCurrentUser();
-		db.collection(user.getUid()).document("stories")
+		db.collection("stories").document(user.getUid())
 				.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
 			@Override
 			public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -60,10 +60,9 @@ public class MyStoriesFragment extends Fragment {
 					if (document.exists()) {
 						Log.i(TAG, document.getId() + " => " + document.toObject(StoriesDocument.class));
 						List<ArticleModel> newsList = document.toObject(StoriesDocument.class).articles;
-						for(ArticleModel newsListItem: newsList) {
-							Log.i(TAG, newsListItem.toString());
+						if(newsList != null) {
+							setUpRecyclerView(newsList);
 						}
-						setUpRecyclerView(newsList);
 					}
 				}
 			}
