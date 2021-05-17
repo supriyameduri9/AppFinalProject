@@ -34,6 +34,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -110,11 +112,12 @@ public class AddStory extends AppCompatActivity {
 	}
 
 	private void addPostToDb(String imageUrl) {
+		final String articleId = UUID.randomUUID().toString();
 		String currentTime = Instant.now().with(ChronoField.NANO_OF_SECOND, 0).toString();
-		ArticleModel articleModel = new ArticleModel(username,
+		ArticleModel articleModel = new ArticleModel(articleId, username,
 				inputTitle.getEditableText().toString(), currentTime, imageUrl,
 				inputContent.getEditableText().toString(),
-				inputCategory.getSelectedItem().toString());
+				inputCategory.getSelectedItem().toString(), "");
 
 		Log.i(TAG, "Saving article to Firestore db:" + articleModel);
 
@@ -127,6 +130,7 @@ public class AddStory extends AppCompatActivity {
 				new OnSuccessListener<Void>() {
 					@Override
 					public void onSuccess(Void aVoid) {
+						broadCastStory(articleModel);
 						Toast.makeText(AddStory.this, "Posted story successfully",
 								Toast.LENGTH_SHORT).show();
 						finish();
@@ -143,6 +147,9 @@ public class AddStory extends AppCompatActivity {
 				}
 		);
 
+	}
+
+	private void broadCastStory(ArticleModel articleModel){
 	}
 
 	private void saveStory(){

@@ -40,6 +40,8 @@ public class ArticleModel implements Serializable {
         this.id = id;
     }
 
+	@NotNull
+    private String articleId;
     @NotNull
     private String title;
     @NotNull
@@ -57,7 +59,15 @@ public class ArticleModel implements Serializable {
     @NotNull
     private String category;
 
-    private String returnEmptyIfNull(String value){
+	public String getArticleId() {
+		return returnEmptyIfNull(articleId);
+	}
+
+	public void setArticleId(String articleId) {
+		this.articleId = articleId;
+	}
+
+	private String returnEmptyIfNull(String value){
         return value == null? "": value;
     }
 
@@ -177,13 +187,15 @@ public class ArticleModel implements Serializable {
     }
 
 	@Ignore
-	public ArticleModel(String author, String title, String publishedAt, String urlToImage, String content, String category) {
+	public ArticleModel(String articleId, String author, String title, String publishedAt, String urlToImage, String content, String category, String description) {
+    	this.articleId = articleId;
 		this.author = author;
 		this.title = title;
 		this.publishedAt =  publishedAt;
 		this.urlToImage = urlToImage;
 		this.content = content;
 		this.category = category;
+		this.description = description;
 	}
 	@Ignore
 	public ArticleModel(){}
