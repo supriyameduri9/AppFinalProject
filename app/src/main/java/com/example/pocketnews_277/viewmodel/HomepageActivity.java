@@ -49,6 +49,7 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
     private FirebaseFirestore db;
     private String username = "";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,9 +84,7 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
 					case R.id.savedList:
 						selectedFragment = new SavedFragment();
 						break;
-
 				}
-
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,selectedFragment).commit();
 				return true;
 			}

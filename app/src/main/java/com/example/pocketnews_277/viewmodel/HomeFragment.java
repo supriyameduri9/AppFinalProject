@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,7 +59,7 @@ public class HomeFragment extends Fragment {
 		newsDataModel = new NewsDataModel();
 		adapter = new NewsListAdapter(getActivity(), newsDataModel.getArticles());
 		recyclerView.setAdapter(adapter);
-		viewModel = ViewModelProviders.of(this).get(NewsDataViewModel.class);
+		viewModel = ViewModelProviders.of(this, new NewsDataViewModelProviderFactory(getActivity())).get(NewsDataViewModel.class);
 		viewModel.getNewsDataObserver().observe(getActivity(), new Observer<NewsDataModel>() {
 			@Override
 			public void onChanged(NewsDataModel newsDataModel) {

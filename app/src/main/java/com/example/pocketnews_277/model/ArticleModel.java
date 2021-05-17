@@ -5,6 +5,12 @@ import android.text.format.DateUtils;
 import com.google.firebase.firestore.Exclude;
 
 import java.io.Serializable;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import com.google.firebase.database.annotations.NotNull;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -12,16 +18,42 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
+
+
+@Entity(tableName = "articles")
 
 public class ArticleModel implements Serializable {
 
+    @PrimaryKey(autoGenerate = true)
+    @Nullable
+    private Integer id;
+
+	@Exclude // excludes from firestore db
+	@Nullable
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(@Nullable Integer id) {
+        this.id = id;
+    }
+
+    @NotNull
     private String title;
+    @NotNull
     private String author;
+    @NotNull
     private String description;
+    @NotNull
     private String publishedAt;
+    @NotNull
     private String urlToImage;
+    @NotNull
     private String url;
+    @NotNull
     private String content;
+    @NotNull
     private String category;
 
     private String returnEmptyIfNull(String value){
@@ -143,6 +175,7 @@ public class ArticleModel implements Serializable {
 		this.publishedAt =  publishedAt;
     }
 
+	@Ignore
 	public ArticleModel(String author, String title, String publishedAt, String urlToImage, String content, String category) {
 		this.author = author;
 		this.title = title;
