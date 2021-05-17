@@ -119,6 +119,7 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 
 				Log.i("NEWS_DETAIL_VIEW: URL for sharing ", apiUrl);
 				viewModel.saveArticle(newsItem);
+				Log.i("viewModel", viewModel.toString());
 				Toast.makeText(getApplicationContext(),"Article saved successfully!",Toast.LENGTH_SHORT).show();
 			}
 		});
