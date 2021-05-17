@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Notifications"
+        android:textSize="25dp" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="Allow Notifications"
+        android:textOff="Off"
+        android:textOn="On"
+        android:textSize="24sp"
+        android:thumb="@drawable/thumb"
+        app:showText="true"
+        app:track="@drawable/track"
+        tools:ignore="HardcodedText" />
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton
+            android:id="@+id/radio_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="All News"
+            android:button="@android:color/transparent"
+            android:elevation="4dp"
+            android:textSize="25sp"
+            android:padding="16dp"
+            android:textColor="@drawable/text_color"
+            android:background="@drawable/radio_selector"
+            tools:ignore="HardcodedText" />
+
+    <RadioButton
+            android:id="@+id/radio_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Positive News"
+            android:button="@android:color/transparent"
+            android:elevation="4dp"
+            android:textSize="25sp"
+            android:padding="16dp"
+            android:textColor="@drawable/text_color"
+            android:background="@drawable/radio_selector"
+            tools:ignore="HardcodedText" />
+</RadioGroup>
+</LinearLayout>
