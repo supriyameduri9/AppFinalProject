@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.pocketnews_277.R;
 import com.example.pocketnews_277.model.ArticleModel;
+import com.example.pocketnews_277.network.NotificationApi;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,6 +47,14 @@ import java.time.temporal.ChronoField;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.moshi.MoshiConverterFactory;
+import retrofit2.http.Field;
 
 public class AddStory extends AppCompatActivity {
 
@@ -150,6 +159,23 @@ public class AddStory extends AppCompatActivity {
 	}
 
 	private void broadCastStory(ArticleModel articleModel){
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl("https://us-central1-pocketnews-277.cloudfunctions.net/api/api/")
+				.addConverterFactory(MoshiConverterFactory.create()).build();
+		NotificationApi api = retrofit.create(NotificationApi.class);
+		Call<ResponseBody> call = api.sendNotification("ALL",
+				"Here is a new post for you!",
+				articleModel.getTitle(), articleModel.getArticleId());
+		call.enqueue(new Callback<ResponseBody>() {
+			@Override
+			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+				Log.i(TAG, "Successfully broadcasted");
+			}
+			@Override
+			public void onFailure(Call<ResponseBody> call, Throwable t) {
+				Log.e(TAG, "Failed to broadcast" + t);
+			}
+		});
 	}
 
 	private void saveStory(){
