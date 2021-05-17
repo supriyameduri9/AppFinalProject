@@ -161,7 +161,7 @@
                         android:id="@+id/timerIcon"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/add_image_icon" />
+                        android:src="@drawable/read_icon" />
 
                     <TextView
                         android:id="@+id/minRead"
@@ -183,22 +183,37 @@
                 app:cardCornerRadius="0dp">
 
                 <RelativeLayout
+                    android:id="@+id/contentLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:padding="15dp"
+                        android:id="@+id/storyContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="10dp"
+                        android:text="content..." />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/webLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <ProgressBar
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         android:id="@+id/progress_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
                         android:layout_marginBottom="70dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
                     <WebView
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         android:id="@+id/webView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
                 </RelativeLayout>

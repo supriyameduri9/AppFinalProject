@@ -2,6 +2,7 @@ package com.example.pocketnews_277.model;
 
 import android.text.format.DateUtils;
 
+import com.example.pocketnews_277.db.ArticleDatabase;
 import com.google.firebase.firestore.Exclude;
 
 import java.io.Serializable;
@@ -98,7 +99,7 @@ public class ArticleModel implements Serializable {
 
 	@Exclude
     public String getAvgReadingTime(){
-    	float totalChars = 200;
+    	float totalChars = getContent().isEmpty()? 1 : getContent().length();
 		Pattern pattern = Pattern.compile("\\[\\+([0-9]+) chars\\]");
 		Matcher matcher = pattern.matcher(getContent());
 		if (matcher.find())
@@ -184,6 +185,8 @@ public class ArticleModel implements Serializable {
 		this.content = content;
 		this.category = category;
 	}
+	@Ignore
+	public ArticleModel(){}
 
 	@Override
 	public String toString() {

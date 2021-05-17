@@ -35,6 +35,7 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 	private TextView time;
 	private TextView title;
 	private TextView minRead;
+	private TextView storyContent;
 	private AppBarLayout appBarLayout;
 	private FrameLayout date_behavior;
 	private Toolbar toolbar;
@@ -44,6 +45,8 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 	private FirebaseAuth auth;
 	private String currentUserId;
 	private NewsDataViewModel viewModel;
+
+	private RelativeLayout webLayout, contentLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,11 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		collapsingToolbarLayout.setTitle("");
 		appBarLayout = findViewById(R.id.appbar);
 		appBarLayout.addOnOffsetChangedListener(this);
+
+		webLayout = (RelativeLayout) findViewById(R.id.webLayout);
+		contentLayout = (RelativeLayout) findViewById(R.id.contentLayout);
+		storyContent = (TextView) findViewById(R.id.storyContent);
+
 		date_behavior = findViewById(R.id.date_behavior);
 		iconsAppBar = findViewById(R.id.detailViewAppBar);
 		imageView = findViewById(R.id.backdrop);
@@ -124,7 +132,16 @@ public class NewsDetailView extends AppCompatActivity implements AppBarLayout.On
 		title.setText(apiTitle);
 		time.setText(apiAuthor + ". " + apiSpanTime);
 		minRead.setText(readTime);
-		initWebView(apiUrl);
+		if(apiUrl.isEmpty()) {
+			contentLayout.setVisibility(View.VISIBLE);
+			webLayout.setVisibility(View.GONE);
+			storyContent.setText(newsItem.getContent());
+
+		} else{
+			contentLayout.setVisibility(View.GONE);
+			webLayout.setVisibility(View.VISIBLE);
+			initWebView(apiUrl);
+		}
 	}
 
 	private void initWebView(String url){
