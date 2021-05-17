@@ -36,6 +36,10 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
         notifyDataSetChanged();
     }
 
+    public void getNewsList(List<ArticleModel> newsList) {
+        this.newsList = newsList;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public NewsListAdapter.NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,7 +49,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
 
     @Override
     public void onBindViewHolder(@NonNull NewsListAdapter.NewsViewHolder holder, int position) {
-		ArticleModel newsItem = newsList.get(position);
+        ArticleModel newsItem = newsList.get(position);
 		holder.title.setText(newsItem.getTitle());
         holder.author.setText(newsItem.getAuthor());
         holder.publishedAt.setText(newsItem.getPrettyPublishedAt() + ". " + newsItem.getAvgReadingTime());

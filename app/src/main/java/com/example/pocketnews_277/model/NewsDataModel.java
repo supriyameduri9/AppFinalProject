@@ -8,6 +8,7 @@ public class NewsDataModel {
     private int totalResults;
     private List<ArticleModel> articles;
 
+
     public NewsDataModel() {
         articles = new ArrayList<>();
     }
