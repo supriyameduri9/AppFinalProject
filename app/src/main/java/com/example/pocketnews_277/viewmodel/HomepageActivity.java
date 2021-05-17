@@ -116,18 +116,19 @@ public class HomepageActivity extends AppCompatActivity implements PopupMenu.OnM
         switch(item.getItemId()){
 			case R.id.pushNotification:
 				// redirect user to login activity
-				Intent goToLoginIntent = new Intent(HomepageActivity.this, Login.class);
-				startActivity(goToLoginIntent);
-				Toast.makeText(this, "Signed out successfully!", Toast.LENGTH_SHORT).show();
+				Intent pushNotificationIntent = new Intent(HomepageActivity.this, NotificationSettingsActivity.class);
+				startActivity(pushNotificationIntent);
+				break;
             case R.id.signOutOption:
                 mAuth.signOut();
                 // redirect user to login activity
                 Intent goToLoginIntent = new Intent(HomepageActivity.this, Login.class);
                 startActivity(goToLoginIntent);
                 Toast.makeText(this, "Signed out successfully!", Toast.LENGTH_SHORT).show();
-            default: return false;
+                break;
         }
-    }
+		return false;
+	}
 
     private void loadHomePage(){
 

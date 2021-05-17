@@ -17,6 +17,7 @@
         android:textSize="25dp" />
 
     <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/allowNotifySwitch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -36,7 +37,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <RadioButton
-            android:id="@+id/radio_one"
+            android:id="@+id/allNewsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -50,7 +51,7 @@
             tools:ignore="HardcodedText" />
 
     <RadioButton
-            android:id="@+id/radio_two"
+            android:id="@+id/positiveNewsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -63,4 +64,21 @@
             android:background="@drawable/radio_selector"
             tools:ignore="HardcodedText" />
 </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveNotifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#000"
+        android:backgroundTint="#000000"
+        android:fontFamily="sans-serif-medium"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textColorHint="#FAFAFA"
+        android:textSize="18sp"
+        android:textStyle="normal" />
 </LinearLayout>

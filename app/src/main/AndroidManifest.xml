@@ -16,6 +16,9 @@
             android:name=".viewmodel.NewsDetailView"
             android:theme="@style/DetailPageTheme" />
         <activity
+            android:name=".viewmodel.NotificationSettingsActivity"
+            android:theme="@style/FullPageTheme" />
+        <activity
             android:name=".viewmodel.HomepageActivity"
             android:theme="@style/FullPageTheme" />
         <activity
