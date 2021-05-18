@@ -29,13 +29,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SavedFragment extends Fragment {
-
+	private final static String TAG = "SavedFragment";
 
 	public NewsDataViewModel viewModel;
 	public NewsListAdapter newsListAdapter;
 	private NewsDataModel newsDataModel;
 	private RecyclerView saverecyclerView;
-	private List<ArticleModel> articles = new ArrayList<>();
+	private List<ArticleModel> articles;
 
 	@Nullable
 	@Override
@@ -45,14 +45,17 @@ public class SavedFragment extends Fragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		articles = new ArrayList<>();
 		viewModel = ViewModelProviders.of(this, new NewsDataViewModelProviderFactory(getActivity())).get(NewsDataViewModel.class);
 
 		saverecyclerView = (RecyclerView) view.findViewById(R.id.rvSavedNews);
 		viewModel.getSavedNews().observe(getActivity(), new Observer<List<ArticleModel>>() {
 			@Override
-			public void onChanged(List<ArticleModel> articles) {
-				if(articles != null){
-					newsListAdapter.setNewsList(articles);
+			public void onChanged(List<ArticleModel> articlesSnapshot) {
+				if(articlesSnapshot != null){
+					articles = articlesSnapshot;
+					Log.i(TAG, "Inside retrofit: " + articles.size());
+					newsListAdapter.setNewsList(articlesSnapshot);
 				} else{
 					Toast.makeText(getActivity(), "Could not retrieve data!", Toast.LENGTH_SHORT).show();
 				}
@@ -72,9 +75,9 @@ public class SavedFragment extends Fragment {
 			@Override
 			public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 					int position = viewHolder.getAbsoluteAdapterPosition();
-					Log.i("position", Integer.toString(position));
-					Log.i("getarticles", Integer.toString(articles.size())); // here in the logcat i get the size as 0, i guess i am not getting the article list in my "articles"
+					Log.i(TAG, "position: " + position + " articles size: " + articles.size());
 					ArticleModel articleModel = articles.get(position);
+					Log.i(TAG, "article: " + Integer.toString(position));
 					viewModel.deleteArticle(articleModel);
 					Snackbar mySnackBar = Snackbar.make(view,"Successfully deleted article",Snackbar.LENGTH_LONG);
 					mySnackBar.setAction("UNDO",new View.OnClickListener(){
