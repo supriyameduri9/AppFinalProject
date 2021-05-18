@@ -52,7 +52,9 @@ public class NotificationSettingsActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.push_notifications);
+		//setContentView(R.layout.push_notifications);
+
+		setContentView(R.layout.push);
 
 		mAuth = FirebaseAuth.getInstance();
 		db = FirebaseFirestore.getInstance();
