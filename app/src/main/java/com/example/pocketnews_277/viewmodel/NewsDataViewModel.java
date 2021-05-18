@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class NewsDataViewModel extends ViewModel {
 
-    private static String API_KEY = "7b7fc2b99c0b4a0cb22c1fd2201203c9";
+    private static String API_KEY = "ec26cfb742464ff5b5900118e7d8481a";
     private static String TODAY = (DateTimeFormatter.ofPattern("yyyy/MM/dd")).format(LocalDate.now());
 
     private MutableLiveData<NewsDataModel> newsData;
