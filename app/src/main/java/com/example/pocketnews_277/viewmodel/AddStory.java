@@ -210,11 +210,11 @@ public class AddStory extends AppCompatActivity {
 		call.enqueue(new Callback<ResponseBody>() {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-				Log.i(TAG, "Successfully broadcasted");
+				Log.i(TAG, "Successfully broadcasted to topic " + topic);
 			}
 			@Override
 			public void onFailure(Call<ResponseBody> call, Throwable t) {
-				Log.e(TAG, "Failed to broadcast" + t);
+				Log.e(TAG, "Failed to broadcast to topic " + topic + " Exception: " + t);
 			}
 		});
 	}

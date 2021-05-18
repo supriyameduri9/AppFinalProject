@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
@@ -126,7 +127,9 @@ public class ArticleModel implements Serializable {
 	@Exclude
 	public String getPublishedDate() {
 		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		inputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 		SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd, yyyy");
+		outputFormat.setTimeZone(TimeZone.getDefault());
 		try {
 			return outputFormat.format(inputFormat.parse(publishedAt));
 		} catch (Exception e){
@@ -138,6 +141,7 @@ public class ArticleModel implements Serializable {
     public String getPrettyPublishedAt(){
     	if (publishedAt == null || publishedAt.isEmpty()) return "";
 		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		inputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			Date date = inputFormat.parse(publishedAt);
 			return (DateUtils.getRelativeTimeSpanString(date.getTime(), Calendar.getInstance().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS).toString())
