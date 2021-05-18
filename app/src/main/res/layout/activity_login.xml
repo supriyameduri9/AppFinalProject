@@ -11,7 +11,7 @@
     android:textAlignment="center"
     tools:context=".viewmodel.Login">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/greetings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:text="Welcome Again"
         android:textAlignment="center"
         android:textColor="#040303"
-        android:textSize="36sp" />
+        android:textSize="36sp" />-->
 
     <ImageView
         android:id="@+id/appIcon"
@@ -29,7 +29,7 @@
         android:layout_height="133dp"
         android:paddingTop="10px"
         android:paddingBottom="100px"
-        android:src="@drawable/logo" />
+        android:src="@drawable/read" />
 
     <LinearLayout
         android:layout_width="match_parent"
