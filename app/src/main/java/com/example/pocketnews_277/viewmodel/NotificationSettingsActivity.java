@@ -32,9 +32,9 @@ import java.util.Map;
 
 public class NotificationSettingsActivity extends AppCompatActivity {
 
+	public final static String ALL_NOTIFICATIONS = "ALL";
+	public final static String POSITIVE_NOTIFICATIONS = "POSITIVE_ONLY";
 	private final static String TAG = "NotificationSettingsActivity";
-	private final static String ALL_NOTIFICATIONS = "ALL";
-	private final static String POSITIVE_NOTIFICATIONS = "POSITIVE_ONLY";
 	private final static String NO_NOTIFICATIONS = "NONE";
 
 	private SwitchCompat allowNotifySwitch;
@@ -182,9 +182,13 @@ public class NotificationSettingsActivity extends AppCompatActivity {
 	}
 
 	private void updateTopicSubscriptions(String newNotificationSetting, String oldNotificaitonSettings){
-		if (oldNotificaitonSettings != NO_NOTIFICATIONS){
+		if (!oldNotificaitonSettings.equals(NO_NOTIFICATIONS)){
 			FirebaseMessaging.getInstance().unsubscribeFromTopic(oldNotificaitonSettings);
+			Log.i(TAG, "Unsubscribed from topic: "  + oldNotificaitonSettings);
 		}
-		FirebaseMessaging.getInstance().subscribeToTopic(newNotificationSetting);
+		if (!newNotificationSetting.equals(NO_NOTIFICATIONS)){
+			FirebaseMessaging.getInstance().subscribeToTopic(newNotificationSetting);
+			Log.i(TAG, "Subscribed to topic: "  + newNotificationSetting);
+		}
 	}
 }

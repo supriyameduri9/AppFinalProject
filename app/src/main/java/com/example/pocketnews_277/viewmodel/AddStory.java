@@ -42,9 +42,14 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.tensorflow.lite.support.label.Category;
+import org.tensorflow.lite.task.text.nlclassifier.NLClassifier;
+
+import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoField;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -56,9 +61,15 @@ import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 import retrofit2.http.Field;
 
+import static com.example.pocketnews_277.viewmodel.NotificationSettingsActivity.ALL_NOTIFICATIONS;
+import static com.example.pocketnews_277.viewmodel.NotificationSettingsActivity.POSITIVE_NOTIFICATIONS;
+
+
 public class AddStory extends AppCompatActivity {
 
 	private final String TAG = "AddStory";
+
+	private final Float POSITIVE_SCORE_THRESHOLD = 0.60f;
 
 	private ImageView inputImage;
 	private TextInputEditText inputTitle;
@@ -158,12 +169,42 @@ public class AddStory extends AppCompatActivity {
 
 	}
 
-	private void broadCastStory(ArticleModel articleModel){
+	public boolean isPositiveText(String input) {
+		float positiveScore = 0.0f;
+
+		try {
+			NLClassifier classifier = NLClassifier.createFromFile(this, "sentiment_analysis.tflite");
+
+			// Run inference
+			Log.i(TAG, "Classifying input: " + input);
+			List<Category> results = classifier.classify(input);
+
+			for (Category result : results) {
+				Log.i(TAG, "Classification result: " + result.getLabel() + " " + result.getScore());
+				if (result.getLabel().equals("Positive")) {
+					positiveScore = result.getScore();
+				}
+			}
+		} catch (Exception e) {
+			Log.e(TAG, "Error classifying input " + input + ". Exception: " + e);
+		}
+		return positiveScore > POSITIVE_SCORE_THRESHOLD;
+	}
+
+	private void broadCastStory(ArticleModel articleModel) {
+		broadCastToTopic(articleModel, ALL_NOTIFICATIONS);
+		if (isPositiveText(articleModel.getContent())) {
+			broadCastToTopic(articleModel, POSITIVE_NOTIFICATIONS);
+		}
+	}
+
+	private void broadCastToTopic(ArticleModel articleModel, String topic){
+
 		Retrofit retrofit = new Retrofit.Builder()
 				.baseUrl("https://us-central1-pocketnews-277.cloudfunctions.net/api/api/")
 				.addConverterFactory(MoshiConverterFactory.create()).build();
 		NotificationApi api = retrofit.create(NotificationApi.class);
-		Call<ResponseBody> call = api.sendNotification("ALL",
+		Call<ResponseBody> call = api.sendNotification(topic,
 				"Here is a new post for you!",
 				articleModel.getTitle(), articleModel.getArticleId());
 		call.enqueue(new Callback<ResponseBody>() {
