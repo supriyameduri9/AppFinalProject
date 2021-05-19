@@ -9,6 +9,6 @@
 ## ✨ Screenshots
 | Home Screen | Demo |  Detail Screen |
 |:-:|:-:|:-:|
-| ![Fist](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/HomePage.png) | ![3](screenshots/demo_gif.gif?raw=true) | ![3](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/NewsDetail.png) |
+| ![Home Screen](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/HomePage.png) | ![3](screenshots/demo_gif.gif?raw=true) | ![3](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/NewsDetail.png) |
 | Movie Details | Trailers |  Reviews |
 | ![4](screenshots/Screenshot_3.jpg?raw=true) | ![5](screenshots/Screenshot_5.jpg?raw=true) | ![6](screenshots/Screenshot_4.jpg?raw=true) |
