@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.pocketnews_277.BuildConfig;
 import com.example.pocketnews_277.db.ArticleDao;
 import com.example.pocketnews_277.db.ArticleDatabase;
 import com.example.pocketnews_277.model.ArticleModel;
@@ -25,7 +26,7 @@ import retrofit2.Response;
 
 public class NewsDataViewModel extends ViewModel {
 
-    private static String API_KEY = "ec26cfb742464ff5b5900118e7d8481a";
+    private static String API_KEY = BuildConfig.ApiKey;
     private static String TODAY = (DateTimeFormatter.ofPattern("yyyy/MM/dd")).format(LocalDate.now());
 
     private MutableLiveData<NewsDataModel> newsData;
