@@ -19,7 +19,7 @@
 
 
 
-## 🌟 Features
+## ✨ Features
 *   Discover the top rated and general news around the world
 *   User can signup, login and signout 
 *   Shows a list of all the news from different news sources
@@ -33,7 +33,7 @@
 *   Cloud Functions as a server for broadcasting remote notifications
 *   Text Classification Tensorflow lite model (toxicity) for sentiment analysis of the stories posted.
 
-## Technical Details:
+## ✨ Technical Details:
 *   [Firebase Authenication](https://firebase.google.com/docs/auth) - for user login/signup
 *   [Glide](https://github.com/bumptech/glide) - for loading and caching images 
 *   [Retrofit 2](https://github.com/square/retrofit) - Type-safe HTTP client for Android and Java by Square, Inc. 
