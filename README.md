@@ -1,5 +1,5 @@
 ### CMPE 277 Final Project - Team #7
-#### ✨ Bhavya Tetali () , ✨Supriya Meduri(015262767)
+#### ✨ Bhavya Tetali (014535144) , ✨Supriya Meduri(015262767)
 
 ![Screen](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/PocketNews-Merge.jpg)
 <h1 align="center">Pocket News</h1>
