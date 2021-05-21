@@ -16,7 +16,7 @@
 
 | Home Screen | Demo |  Detail View |
 |:-:|:-:|:-:|
-| ![Fist](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/HomePage.png) | ![3]() | ![3](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/DetailView.png) |
+| ![Fist](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/HomePage.png) | ![3](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/DemoGif.gif) | ![3](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/DetailView.png) |
 | Add Story | My Stories Fragment | Saved Fragment
 | ![4](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/AddStory.png) | ![5](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/MyStory.png)  | ![6](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/SavedFragment.png)|
 | Share Article | All Stories Fragment | Push Notifications
