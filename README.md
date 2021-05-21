@@ -15,7 +15,7 @@
 | Add Story | My Stories Fragment | Saved Fragment
 | ![4](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/AddStory.png) | ![5](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/MyStory.png)  | ![6](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/SavedFragment.png)|
 | Share Article | All Stories Fragment | Push Notifications
-| ![4]() | ![5]()  | ![6]()|
+| ![4](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/SharePopUp.png) | ![5](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/AllStories.png)  | ![6](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/PushNotification.png)|
 
 
 
