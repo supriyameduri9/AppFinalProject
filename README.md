@@ -1,6 +1,9 @@
-### CMPE 277 Final Project - Team #7
-#### ✨ Bhavya Tetali (014535144) , ✨Supriya Meduri(015262767)
+# CMPE 277 Final Project
 
+# Team #7
+### ✨ Bhavya Tetali (014535144) , ✨Supriya Meduri(015262767)
+#
+#
 ![Screen](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/PocketNews-Merge.jpg)
 <h1 align="center">Pocket News</h1>
 <h4 align="center">
@@ -9,6 +12,8 @@
 
 
 ## ✨ Screenshots
+
+
 | Home Screen | Demo |  Detail View |
 |:-:|:-:|:-:|
 | ![Fist](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/HomePage.png) | ![3]() | ![3](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/DetailView.png) |
@@ -18,8 +23,8 @@
 | ![4](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/SharePopUp.png) | ![5](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/AllStories.png)  | ![6](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/PushNotification.png)|
 
 
-
 ## ✨ Features
+
 *   Discover the top rated and general news around the world
 *   User can signup, login and signout 
 *   Shows a list of all the news from different news sources
@@ -33,7 +38,8 @@
 *   Cloud Functions as a server for broadcasting remote notifications
 *   Text Classification Tensorflow lite model (toxicity) for sentiment analysis of the stories posted.
 
-## ✨ Technical Details:
+## ✨ Technical Details
+
 *   [Firebase Authentication](https://firebase.google.com/docs/auth) - for user login/signup
 *   [Glide](https://github.com/bumptech/glide) - for loading and caching images 
 *   [Retrofit 2](https://github.com/square/retrofit) - Type-safe HTTP client for Android and Java by Square, Inc. 
