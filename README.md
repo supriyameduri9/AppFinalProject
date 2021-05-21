@@ -6,9 +6,32 @@
 <h4 align="center">
 	Discover the top-headlines and general news all around the globe. News data fetched using <a href="https://newsapi.org/">newsapi.org</a> API.
 </h4>
+
+
 ## ✨ Screenshots
-| Home Screen | Demo |  Detail Screen |
+| Home Screen | Demo |  Detail View |
 |:-:|:-:|:-:|
-| ![Home Screen](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/HomePage.png) | ![3](screenshots/demo_gif.gif?raw=true) | ![3](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/NewsDetail.png) |
-| Movie Details | Trailers |  Reviews |
-| ![4](screenshots/Screenshot_3.jpg?raw=true) | ![5](screenshots/Screenshot_5.jpg?raw=true) | ![6](screenshots/Screenshot_4.jpg?raw=true) |
+| ![Fist](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/HomePage.png) | ![3]() | ![3](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/DetailView.png) |
+| Add Story | My Stories Fragment | Saved Fragment
+| ![4](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/AddStory.png) | ![5](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/MyStory.png)  | ![6](https://github.com/supriyameduri9/AppFinalProject/blob/main/PocketNews-Screenshots/SavedFragment.png)|
+| Share Article | My Stories Fragment | Push Notifications
+| ![4]() | ![5]()  | ![6]()|
+
+
+
+## 🌟 Features
+*   Discover the top rated and general news around the world
+*   User can signup, login and signout 
+*   Shows a list of all the news from different news sources
+*   Users can save a news article for future read in the details view by tapping save icon 
+*   Users can share news articles using external apps
+*   Users can post their own stories they would like to share
+*   Users can subscribe to either uplifting/positive or all news, in which case they will receive push notifications for stories shared by any Pocket News user.
+*   Advanced uses of Room
+*   MVVM with Android Architecture Components(Room, LiveData, ViewModel)
+*   Firebase Cloud Messaging for push notifications service
+*   Cloud Functions as a server for broadcasting remote notifications
+*   Text Classification Tensorflow lite model (toxicity) for sentiment analysis of the stories posted.
+
+
+
