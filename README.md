@@ -34,17 +34,17 @@
 *   Text Classification Tensorflow lite model (toxicity) for sentiment analysis of the stories posted.
 
 ## ✨ Technical Details:
-*   [Firebase Authenication](https://firebase.google.com/docs/auth) - for user login/signup
+*   [Firebase Authentication](https://firebase.google.com/docs/auth) - for user login/signup
 *   [Glide](https://github.com/bumptech/glide) - for loading and caching images 
 *   [Retrofit 2](https://github.com/square/retrofit) - Type-safe HTTP client for Android and Java by Square, Inc. 
 *   [Gson](https://github.com/google/gson) - for serialization/deserialization Java Objects into JSON and back
+*   [Room DB](https://developer.android.com/reference/android/arch/persistence/room/RoomDatabase) - for saving news articles
+*   [Firebase Cloud Messaging]() - for push notifications service
+*   [Cloud Functions]() - as a server for broadcasting remote notifications
+*   [Text Classification Tensorflow lite Model]() - for sentiment analysis of the stories posted.
 *   [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 *   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 *   [DataBinding](https://developer.android.com/topic/libraries/data-binding/)
-*   [Room DB](https://developer.android.com/reference/android/arch/persistence/room/RoomDatabase) - for saving news articles
-*   [Firebsae Cloud Messaging]() - for push notifications service
-*   [Cloud Functions]() - as a server for broadcasting remote notifications
-*   [Text Classification Tensorflow lite Model]() - for sentiment analysis of the stories posted.
 
 
 
