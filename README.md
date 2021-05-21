@@ -37,11 +37,13 @@
 *   [Firebase Authentication](https://firebase.google.com/docs/auth) - for user login/signup
 *   [Glide](https://github.com/bumptech/glide) - for loading and caching images 
 *   [Retrofit 2](https://github.com/square/retrofit) - Type-safe HTTP client for Android and Java by Square, Inc. 
-*   [Gson](https://github.com/google/gson) - for serialization/deserialization Java Objects into JSON and back
+*   [Moshi](https://github.com/google/gson) - for serialization/deserialization Java Objects into JSON and back
 *   [Room DB](https://developer.android.com/reference/android/arch/persistence/room/RoomDatabase) - for saving news articles
-*   [Firebase Cloud Messaging]() - for push notifications service
-*   [Cloud Functions]() - as a server for broadcasting remote notifications
-*   [Text Classification Tensorflow lite Model]() - for sentiment analysis of the stories posted.
+*   [Firestore](https://firebase.google.com/docs/firestore) - for storing user posts
+*   [Firebase Storage](https://firebase.google.com/docs/storage/android/create-reference) - for storing images
+*   [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging/android/client) - for push notifications service
+*   [Cloud Functions](https://firebase.google.com/docs/functions) - as a server for broadcasting remote notifications
+*   [Text Classification Tensorflow lite Model](https://tfhub.dev/tensorflow/tfjs-model/toxicity/1/default/1) - for sentiment analysis of the stories posted.
 *   [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 *   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 *   [DataBinding](https://developer.android.com/topic/libraries/data-binding/)
