@@ -54,7 +54,20 @@
 *   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 *   [DataBinding](https://developer.android.com/topic/libraries/data-binding/)
 
+## ✨ Task Distribution
 
+* Bhavya Lalithya
+	* Add Stories, My Stories, and All Stories Fragment. 
+	* Push Notifications, Broadcast Server, Tensorflow lite model integration
+	* Estimate average read time for news articles and stories.	
+	* Detailed View Page.
+* Supriya Meduri
+	* Login, Sign Out and Signup for users.
+	* Get and display news data from multiple sources.
+	* Search news functionality.
+	* Save the news article .
+	* Share the news to multiple apps.
+	* Delete the news article from saved article with snackbar and "undo" action
 
 
 
